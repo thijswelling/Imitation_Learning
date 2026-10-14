@@ -1,11 +1,8 @@
+## Command Cheatsheet
 
----
+### 1. Teleoperation Protocol
 
-### Command setup:
-
-#### 1. Teleoperation Protocol
-
-* Open een terminal en bereid de workspace voor:
+* Open a terminal and set up your workspace:
 ```bash
 cd ~/ros2_ws
 colcon build --symlink-install
@@ -15,22 +12,22 @@ source install/setup.bash
 ```
 
 
-* Druk op de startknop op de UR3e Teach Pendant.
-* Druk op **`e`** om de Omni-pen uit te lijnen met de UR3e-gripper en de teleoperatie te starten.
-* **Toetsenbordbediening:**
-* **Spacebalk:** Clutch (koppeling loskoppelen)
-* **`r`:** Breng robot naar Home-positie
-* **`c`:** Sluit gripper
+* Press the start button on the UR3e Teach Pendant.
+* Press **`e`** to align the Omni pen with the UR3e gripper and start teleoperation.
+* **Keyboard controls:**
+* **Spacebar:** Clutch (disengage connection)
+* **`r`:** Bring robot to home position
+* **`c`:** Close gripper
 * **`o`:** Open gripper
 
 
 
 ---
 
-#### 2. Record Protocol
+### 2. Record Protocol
 
-* **Terminal 1:** Start de teleoperatie volgens de stappen hierboven.
-* **Terminal 2:** Start de trial logger:
+* **Terminal 1:** Start teleoperation following the steps above.
+* **Terminal 2:** Start the trial logger:
 ```bash
 cd ~/ros2_ws
 colcon build --symlink-install
@@ -40,20 +37,20 @@ ros2 run ur3e_teleop_control trial_logger
 ```
 
 
-* **Terug in Terminal 1:**
-* Druk op **`r`** voor Home-positie.
-* Druk op **`e`** om teleop te starten.
-* Druk op **`1`** om de opname van de CSV te starten.
-* Voer de demonstratie uit.
-* Druk op **`2`** om de opname te stoppen.
-* Druk op **`r`** om weer naar Home te gaan.
-* *Herhaal dit ongeveer 50 keer (slechte demonstraties worden straks automatisch weggefilterd).*
+* **Back in Terminal 1:**
+* Press **`r`** for the home position.
+* Press **`e`** to start teleoperation.
+* Press **`1`** to start recording the CSV.
+* Perform the demonstration.
+* Press **`2`** to stop recording.
+* Press **`r`** to return home.
+* *Repeat this about 50 times (poor demonstrations will be automatically filtered out).*
 
 
 
 ---
 
-#### 3. Create Usable Dataset
+### 3. Create Usable Dataset
 
 ```bash
 cd ~/ros2_ws
@@ -64,7 +61,7 @@ python3 ./create_dataset.py
 
 ---
 
-#### 4. Train Algorithm
+### 4. Train Algorithm
 
 ```bash
 cd ~/ros2_ws/lerobot_source
@@ -88,7 +85,7 @@ python3 src/lerobot/scripts/lerobot_train.py \
 
 ---
 
-#### 5. Deployment / Autonomous Execution
+### 5. Deployment / Autonomous Execution
 
 * **Terminal 1 (Driver & Controller):**
 ```bash
@@ -105,7 +102,7 @@ ros2 launch ur_robot_driver ur_control.launch.py \
 ```
 
 
-*(Druk op **[PLAY]** op de UR Teach Pendant voor External Control).*
+*(Press **[PLAY]** on the UR Teach Pendant for External Control).*
 * **Terminal 2 (AI Inference Node):**
 ```bash
 cd ~/ros2_ws
@@ -117,9 +114,3 @@ export PYTHONPATH=$PYTHONPATH:~/ros2_ws/lerobot_source/src
 ros2 run ur3e_teleop_control inference_node
 
 ```
-
-
-
----
-
-Met dit overzicht heb je een compleet en prachtig gedocumenteerd handboek voor je experimenten. Veel success met het verder finetunen en testen van je opstelling!
