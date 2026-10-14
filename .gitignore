@@ -1,0 +1,8 @@
+build/
+install/
+log/
+outputs/
+ur3e_datasets/
+teleop_experiment_data/
+__pycache__/
+.vscode/
